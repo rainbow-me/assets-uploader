@@ -1,0 +1,16 @@
+{
+  "name": "assets-uploader",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "cloudinary": "^1.30.0",
+    "node-fetch": "^2.6.7",
+    "yargs": "^17.5.1"
+  }
+}
