@@ -3,11 +3,7 @@ const yargs = require('yargs/yargs')
 const fs = require("fs")
 const fetch = require("node-fetch")
 const { hideBin } = require('yargs/helpers')
-const { spawnSync, exec, execSync } = require('child_process');
-
-// console.error('error', child.error);
-// console.log('stdout ', child.stdout);
-// console.error('stderr ', child.stderr);
+const { execSync } = require('child_process');
 
 const link  = (code, chain) => `https://rainbowme-res.cloudinary.com/image/upload/assets/${chain}/${code}.png`
 
@@ -42,7 +38,7 @@ for (let chain of chains) {
         console.log(`Analysing... ${chain}/${code}`)
         const logo = blockchainsFolder + chain + "/assets/" + code + "/logo.png"
         const commitHash = execSync(`git -C ${argv.dir} log -n 1 --pretty=format:%H -- blockchains/${chain}/assets/${code}/logo.png | cat`, { encoding : 'utf8' })
-        if (commitHash !== "" && commitHash !== recentCommits[code.toLowerCase()]) {
+        if (commitHash !== "" && (forceUpload || commitHash !== recentCommits[code.toLowerCase()])) {
             recentCommits[code.toLowerCase()] = commitHash.toLowerCase()
             logos.push([chain, code, logo])
         } else {
