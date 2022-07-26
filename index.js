@@ -75,6 +75,7 @@ async function uploadImages() {
         }
     }
 
+    fs.writeFileSync("./lastCommits.json", JSON.stringify(recentCommits, null, 2))
 }
 
 uploadImages()
